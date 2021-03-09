@@ -7,66 +7,81 @@ describe('Thermostat', function() {
     thermostat = new Thermostat;
   }) ;
 
-  it('starts at 20 degrees celcius', function() {
-    expect(thermostat.temp).toEqual(20);
+  it('starts at default temp', function() {
+    expect(thermostat.getTemp()).toEqual(thermostat.DEFAULT_TEMP);
   });
 
   it('can increase he temp with an up function', function() {
-    thermostat.change(5);
-    expect(thermostat.temp).toEqual(25);
+    thermostat.up();
+    expect(thermostat.getTemp()).toEqual(thermostat.DEFAULT_TEMP + 1);
   });
 
   it('can decrease the temp, with a down function', function() {
-    thermostat.change(-5);
-    expect(thermostat.temp).toEqual(15);
+    thermostat.down();
+    expect(thermostat.getTemp()).toEqual(thermostat.DEFAULT_TEMP - 1);
   });
 
-  it('cannot be set at a temp lower than 10 ', function() {
-
-    expect(function(){thermostat.change(-11);}).toThrow(new Error("Cannot set below 10 degreeeees"));
+  it('cannot be set at a temp lower than mintemp ', function() {
+    var i;
+    for(i = 0; i < (thermostat.DEFAULT_TEMP - thermostat.MIN_TEMP); i++){
+      thermostat.down();
+    };
+    expect(function(){thermostat.down();}).toThrow(new Error(`Cannot set below ${thermostat.MIN_TEMP} degreeeees`));
   });
-  it('cannot be set at a temp higher than 25 when power saving mode on ', function() {
-    expect(function(){thermostat.change(6);}).toThrow(new Error("Cannot set above 25 degreeeees in power save mode"));
+  it('cannot be set at a temp higher than maxtemp when power saving mode on ', function() {
+    var i;
+    for(i = 0; i < (thermostat.MAX_TEMP - thermostat.DEFAULT_TEMP); i++){
+      thermostat.up();
+    };
+    expect(function(){thermostat.up();}).toThrow(new Error(`Cannot set above ${thermostat.MAX_TEMP} degreeeees in power save mode`));
   });
-  it('cannot be set at a temp higher than 32 when power saving mode off ', function() {
+  it('cannot be set at a temp higher than maxtemp_no_ps when power saving mode off ', function() {
     thermostat.psOff();
-    expect(function(){thermostat.change(13);}).toThrow(new Error("Cannot set above 32 degreeeees in power save mode off"));
-    expect(function(){thermostat.change(12);}).not.toThrow(new Error("Cannot set above 32 degreeeees in power save mode off"));
+    var i;
+    for(i = 0; i < (thermostat.MAX_TEMP_NO_PS - thermostat.DEFAULT_TEMP); i++){
+      thermostat.up();
+    };
+    expect(function(){thermostat.up();}).toThrow(new Error(`Cannot set above ${thermostat.MAX_TEMP_NO_PS} degreeeees in power save mode off`));
   });
 
   describe('power saving mode', function() {
     it('is on by default', function() {
-      expect(thermostat.ps).toBe(true);
+      expect(thermostat.isPowerSaving()).toBe(true);
     });
     it('can be switched off', function() {
       thermostat.psOff();
-      expect(thermostat.ps).toBe(false);
+      expect(thermostat.isPowerSaving()).toBe(false);
     });
     it('can be switched back on', function() {
       thermostat.psOff();
       thermostat.psOn();
-      expect(thermostat.ps).toBe(true);
+      expect(thermostat.isPowerSaving()).toBe(true);
     });
   });
   describe('reset', function() {
-    it('sets the temperature back to 20', function() {
-      thermostat.change(4);
+    it('sets the temperature back to default temp', function() {
+      thermostat.up();
       thermostat.reset();
-      expect(thermostat.temp).toEqual(20);
+      expect(thermostat.getTemp()).toEqual(thermostat.DEFAULT_TEMP);
     });
   });
   describe('read usage', function() {
-    it('returns low-usage when temperature below 18', function() {
-      thermostat.change(-3);
+    it('returns low-usage when temperature below low usage threshold', function() {
+      var i;
+      for(i = 0; i < ((thermostat.DEFAULT_TEMP - thermostat.LOW_USAGE_THRESH) + 1); i++){
+        thermostat.down();
+      };
       expect(thermostat.readUsage()).toEqual('low-usage');
     });
-    it('returns medium-usage when temperature less than or equal to 25', function() {
-      thermostat.change(5);
+    it('returns medium-usage when temperature between low and high thresholds', function() {
       expect(thermostat.readUsage()).toEqual('medium-usage');
     });
-    it('returns high-usage when temperature higher than 25', function() {
+    it('returns high-usage when temperature higher than high usage threshold', function() {
       thermostat.psOff()
-      thermostat.change(6);
+      var i;
+      for(i = 0; i < ((thermostat.HIGH_USAGE_THRESH - thermostat.DEFAULT_TEMP) + 1); i++){
+        thermostat.up();
+      };
       expect(thermostat.readUsage()).toEqual('high-usage');
     });
   });
