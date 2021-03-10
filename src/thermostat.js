@@ -23,10 +23,10 @@ class Thermostat{
 
   isMaxTemp() {
     if (this.isPowerSaving()) {
-      return this.temp === this.MAX_TEMP;
+      return this.temp >= this.MAX_TEMP;
     }
     else {
-      return this.temp === this.MAX_TEMP_NO_PS;
+      return this.temp >= this.MAX_TEMP_NO_PS;
     }
   };
 
