@@ -1,25 +1,30 @@
 $(document).ready(function(){
   var thermostat = new Thermostat;
-  $( "#temperature" ).text( `${thermostat.getTemp()}`);
+  updateTemperature();
   $( "#temperature-up ").click(function(){
     thermostat.up();
-    $( "#temperature" ).text( `${thermostat.getTemp()}`);
+    updateTemperature();
   });
   $( "#temperature-down").click(function(){
     thermostat.down();
-    $( "#temperature" ).text( `${thermostat.getTemp()}`);
+    updateTemperature();
   });
   $( "#powersaving-on").click(function(){
     thermostat.psOn();
     $( "#power-saving-status" ).text( "on" );
+    updateTemperature();
   });
   $( "#powersaving-off").click(function(){
     thermostat.psOff();
     $( "#power-saving-status" ).text( "off" );
+    updateTemperature();
   });
   $( "#temperature-reset").click(function(){
     thermostat.reset();
-    $( "#temperature" ).text( `${thermostat.getTemp()}`);
+    updateTemperature();
   });
-
+  function updateTemperature() {
+    $( "#temperature" ).text( `${thermostat.getTemp()}`);
+    $( "#temperature" ).attr('class', thermostat.readUsage());
+  };
 });
