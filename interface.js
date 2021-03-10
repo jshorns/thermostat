@@ -1,5 +1,15 @@
 $(document).ready(function(){
   var thermostat = new Thermostat;
+
+  // $( "#weather" ).load("api.openweathermap.org/data/2.5/weather?q=London&appid=a7d354904dff270ea0aa8d64e7791ab2");
+
+  $.get('http://api.openweathermap.org/data/2.5/weather?q=Bristol&appid=a7d354904dff270ea0aa8d64e7791ab2',
+  function(data) {
+    $( "#weather" ).text(data.main.temp);
+  });
+
+
+  
   updateTemperature();
   $( "#temperature-up ").click(function(){
     thermostat.up();
@@ -27,4 +37,5 @@ $(document).ready(function(){
     $( "#temperature" ).text( `${thermostat.getTemp()}`);
     $( "#temperature" ).attr('class', thermostat.readUsage());
   };
+
 });
