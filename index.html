@@ -10,6 +10,14 @@
 <body>
     <section id ="thermostat">
     <h1 id="temperature"></h1>
+    <h2>The current temperature in <span id="city"></span> is <span id="current_temp"></span> degrees.</h2>
+    <p>Want the temperature in a different city?</p>
+    <p><form id="change-city">
+      <label for "city_name">City name:</label>
+      <input type="text" id="city_name"/>
+      <input type="submit" value="Change city"></input>
+    </form></p>
+
     <p>
         <button id='temperature-up'>+</button>
         <button id='temperature-down'>-</button>

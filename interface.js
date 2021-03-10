@@ -3,13 +3,24 @@ $(document).ready(function(){
 
   // $( "#weather" ).load("api.openweathermap.org/data/2.5/weather?q=London&appid=a7d354904dff270ea0aa8d64e7791ab2");
 
-  $.get('http://api.openweathermap.org/data/2.5/weather?q=Bristol&appid=a7d354904dff270ea0aa8d64e7791ab2',
+  $.get('http://api.openweathermap.org/data/2.5/weather?q=London&appid=a7d354904dff270ea0aa8d64e7791ab2&units=metric',
   function(data) {
-    $( "#weather" ).text(data.main.temp);
+    $( "#city" ).text(data.name);
+    $( "#current_temp" ).text(data.main.temp);
+  });
+
+  $( "#change-city" ).submit(function(event) {
+    event.preventDefault();
+    var city = $( "#city_name").val();
+    $.get("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=a7d354904dff270ea0aa8d64e7791ab2&units=metric",
+    function(data) {
+      $( "#city" ).text(data.name);
+      $( "#current_temp" ).text(data.main.temp);
+    });
   });
 
 
-  
+
   updateTemperature();
   $( "#temperature-up ").click(function(){
     thermostat.up();
