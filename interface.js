@@ -1,4 +1,3 @@
-$(document).ready(function(){
   var thermostat = new Thermostat;
 
   // $( "#weather" ).load("api.openweathermap.org/data/2.5/weather?q=London&appid=a7d354904dff270ea0aa8d64e7791ab2");
@@ -18,7 +17,6 @@ $(document).ready(function(){
       $( "#current_temp" ).text(data.main.temp);
     });
   });
-
 
 
   updateTemperature();
@@ -48,5 +46,3 @@ $(document).ready(function(){
     $( "#temperature" ).text( `${thermostat.getTemp()}`);
     $( "#temperature" ).attr('class', thermostat.readUsage());
   };
-
-});

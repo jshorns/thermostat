@@ -1,9 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;400&display=swap');
+body {
+  align-items: center;
+  text-align: center;
+  background-color: #FF773D;
+  font-family: 'Raleway', sans-serif;
+  padding-top: 100px;
+  color: #F43A15;
+}
+button {
+  font-family: 'Raleway', sans-serif;
+  background-color: #FF7E47;
+  border: 1px solid #F43A15;
+  color: #F43A15;
+}
+input {
+  font-family: 'Raleway', sans-serif;
+  background-color: #FF7E47;
+  border: 1px solid #F43A15;
+  color: #F43A15;
+}
+h1 {
+  font-size: 30pt;
+  color: #F43A15;
+}
+#thermostat {
+  background-color: #FF8D5C;
+  max-width: 400px;
+  margin: auto;
+  align-items: center;
+  text-align: center;
+  padding: 50px;
+  border: 2px solid #F55536;
+  color: #F43A15;
+}
+
 .low-usage {
   color: green;
 }
 
 .medium-usage {
-  color: black;
+  color: #F43A15;;
 }
 
 .high-usage {

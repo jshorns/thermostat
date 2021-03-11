@@ -4,12 +4,13 @@
     <link rel="stylesheet" href="style.css" type="text/css">
     <script src="jquery.js"> </script>
     <script src="src/thermostat.js"> </script>
-    <script src="interface.js"> </script>
+    <script defer src="interface.js"> </script>
     <title>Thermostat</title>
 </head>
 <body>
-    <section id ="thermostat">
+    <section id="thermostat">
     <h1 id="temperature"></h1>
+    <p>🌡</p>
     <h2>The current temperature in <span id="city"></span> is <span id="current_temp"></span> degrees.</h2>
     <p>Want the temperature in a different city?</p>
     <p><form id="change-city">
@@ -22,7 +23,9 @@
         <button id='temperature-up'>+</button>
         <button id='temperature-down'>-</button>
         <button id="temperature-reset"> Reset</button>
+      </p><p>
         Power saving mode is <span id="power-saving-status">on</span>
+      </p><p>
         <button id="powersaving-on"> PS - On </button>
         <button id="powersaving-off"> PS - Off</button>
         <span id="weather"></span>
