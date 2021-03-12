@@ -2,46 +2,73 @@
 body {
   align-items: center;
   text-align: center;
-  background-color: #FF773D;
   font-family: 'Raleway', sans-serif;
   padding-top: 100px;
-  color: #F43A15;
 }
 button {
   font-family: 'Raleway', sans-serif;
-  background-color: #FF7E47;
-  border: 1px solid #F43A15;
-  color: #F43A15;
+  border: 1px solid;
 }
 input {
   font-family: 'Raleway', sans-serif;
-  background-color: #FF7E47;
-  border: 1px solid #F43A15;
-  color: #F43A15;
+  border: 1px solid;
 }
 h1 {
   font-size: 30pt;
-  color: #F43A15;
 }
 #thermostat {
-  background-color: #FF8D5C;
   max-width: 400px;
   margin: auto;
   align-items: center;
   text-align: center;
   padding: 50px;
-  border: 2px solid #F55536;
+  border: 2px solid;
+}
+
+.low-usage-dark {
+  color: #65A040;
+  background-color: #B3D89C;
+  border-color: #65A040;
+}
+
+.low-usage-light {
+  color: #65A040;
+  background-color: #D0EFB1;
+  border-color: #65A040;
+}
+
+.low-usage-emoji::after {
+  font-size: 20pt;
+  content: '😎';
+}
+
+.medium-usage-light {
+  color: #3C352A;
+  background-color: #ECDCC9;
+  border-color: #3C352A;
+}
+.medium-usage-dark {
+  color: #3C352A;
+  background-color: #CAC2B5;
+  border-color: #3C352A;
+}
+.medium-usage-emoji::after {
+  font-size: 20pt;
+  content: '🌝';
+}
+
+.high-usage-light {
   color: #F43A15;
-}
+  background-color: #FF8D5C;
+  border-color: #F55536;
 
-.low-usage {
-  color: green;
 }
-
-.medium-usage {
-  color: #F43A15;;
+.high-usage-dark {
+  background-color: #FF773D;
+  color: #F43A15;
+  border-color: #F55536;
 }
-
-.high-usage {
-  color: red;
+.high-usage-emoji::after {
+  font-size: 20pt;
+  content: '🥵';
 }

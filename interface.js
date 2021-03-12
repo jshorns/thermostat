@@ -30,12 +30,12 @@
   });
   $( "#powersaving-on").click(function(){
     thermostat.psOn();
-    $( "#power-saving-status" ).text( "on" );
+    $( "#power-saving-status" ).text( "on 🌳" );
     updateTemperature();
   });
   $( "#powersaving-off").click(function(){
     thermostat.psOff();
-    $( "#power-saving-status" ).text( "off" );
+    $( "#power-saving-status" ).text( "off 🔥" );
     updateTemperature();
   });
   $( "#temperature-reset").click(function(){
@@ -43,6 +43,11 @@
     updateTemperature();
   });
   function updateTemperature() {
-    $( "#temperature" ).text( `${thermostat.getTemp()}`);
-    $( "#temperature" ).attr('class', thermostat.readUsage());
+    $( "#temperature" ).text( `${thermostat.getTemp()}°`);
+    $( "#thermostat" ).attr('class', thermostat.readUsage() + '-light');
+    $( "#emoji" ).attr('class', thermostat.readUsage() + '-emoji');
+    $( "body" ).attr('class', thermostat.readUsage() + '-dark');
+    $( "button" ).attr('class', thermostat.readUsage() + '-dark');
+    $( "input" ).attr('class', thermostat.readUsage() + '-dark');
+    $( "#emoji" ).attr( 'class', thermostat.readUsage() + '-emoji')
   };
